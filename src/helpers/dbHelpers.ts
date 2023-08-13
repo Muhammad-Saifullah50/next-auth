@@ -15,7 +15,8 @@ export const readDatabase = () => {
     // readFileSync is also a buit in node js module which allows us to read from a file 
     // utf-8 converts the data recieved into human readable string
     console.log(dbResponse);
-    return dbResponse // returning the dbResponse variable from the function
+    const data = JSON.parse(dbResponse)
+    return data // returning the dbResponse variable from the function
 }
 
 export const writeDatabase = async (newData: User) => {
