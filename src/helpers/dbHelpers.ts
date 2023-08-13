@@ -2,6 +2,7 @@
 
 import path from "path";
 import fs from "fs"
+import { User } from "@/types";
 
 const databasePath = path.join(process.cwd(), "src/database/db.json")
 // This variable tells where our database file is located, so that we can read and write from it.  process.cwd() gives us the current working directory, and trhe second argument specifies where the db file is in the directory
@@ -15,4 +16,11 @@ export const readDatabase = () => {
     // utf-8 converts the data recieved into human readable string
     console.log(dbResponse);
     return dbResponse // returning the dbResponse variable from the function
+}
+
+export const writeDatabase = async (newData: User) => {
+    const db = databasePath;
+    const newUserData = newData
+    console.log(newUserData, "newUserData")
+    const updatedData = await db.users.push(newUserData)
 }
