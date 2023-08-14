@@ -1,4 +1,4 @@
-import { findExistingUser, writeDatabase } from "@/helpers/dbHelpers";
+import { findExistingUser } from "@/helpers/dbHelpers";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import bcryptjs from 'bcryptjs'
