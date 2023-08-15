@@ -23,7 +23,7 @@ const Navbar = () => {
             <li className="hover:underline underline-offset-4 decoration-2 decoration-black py-2 rounded-lg px-5">
               Pricing
             </li>
-            <Button className="bg-black hover:bg-white hover:text-black">Logout</Button>
+            <Button className="bg-black hover:bg-white hover:text-black hover:outline hover:outline-1 hover:outline-black">Logout</Button>
           </ul>
         </div>
       </nav>

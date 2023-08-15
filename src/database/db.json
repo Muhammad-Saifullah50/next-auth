@@ -1,3 +1,10 @@
 {
-  "users": []
+  "users": [
+    {
+      "_id": "352d6b53-9014-46eb-8edb-436c81769486",
+      "name": "kjkkjkkjjk",
+      "email": "jjkjkkjk",
+      "password": "$2a$10$Rv0CncqoInic7YFFC8DQg.kxYst21wqYZhCskElECNlN3TwaR3IN."
+    }
+  ]
 }
