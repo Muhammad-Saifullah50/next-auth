@@ -5,7 +5,7 @@ export const POST = () => {
 
         const response = NextResponse.json({ message: "logout successful", status: 200 }
         )
-        response.cookies.delete('token')
+        response.cookies.delete("token")
         return response
     } catch (error: any) {
         throw new Error(error.message)

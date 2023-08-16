@@ -8,6 +8,7 @@ export const POST = async (request: NextRequest) => {
     // POST request as we will be sending data to the server
     try {
         const requestbody = await request.json()
+        console.log(requestbody, "requestbody")
         // converting the incoming request into json format to deal with it and saving it in requestbody variable
 
         if (!requestbody.name || !requestbody.email || !requestbody.password) {
@@ -45,7 +46,7 @@ export const POST = async (request: NextRequest) => {
         return NextResponse.json({ message: "signup successful", status: 200 })
         // returning successful response 
     } catch (error: any) {
-        throw new Error(error.message) // error handling
+        console.error(error?.nessage, "error") // error handling
     }
 
 

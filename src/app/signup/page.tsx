@@ -6,9 +6,13 @@ const SignupPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [successMsg, setSuccessMsg] = useState("")
+  const [error, setError] = useState("")
 
   const handleSignUp = async () => {
+    if (!name || !email || !password) {
+      setError("Enter your name, email and password")
+      return error
+    }
     const signupData = {
       name: name,
       email: email,
@@ -25,10 +29,8 @@ const SignupPage = () => {
           body: JSON.stringify(signupData),
         }
       );
-      if (apiresponse.ok) {
-        setSuccessMsg("Requset successful")
-      }
-    
+      return window.location.href = '/dashboard'
+
     } catch (error) {
       console.log("signup failed")
     }
@@ -42,6 +44,7 @@ const SignupPage = () => {
         </div>
         <div className="flex flex-col justify-center items-center mt-10 md:mt-4 space-y-6 md:space-y-8">
           <div className="w-full">
+            <p className="text-red-600 mb-5 text-center">{error}</p>
             <input
               type="text"
               placeholder="Name"
@@ -72,12 +75,9 @@ const SignupPage = () => {
           </div>
         </div>
         <div className="text-center mt-7 flex flex-col space-y-5">
-          <p>{successMsg}</p>
-          <Link href="/signup">
-            <button onClick={handleSignUp} className="uppercase px-24 md:px-[118px] lg:px-[140px] py-2 rounded-md text-white bg-black  font-medium w-full hover:opacity-90">
-              Sign Up
-            </button>
-          </Link>
+          <button onClick={handleSignUp} className="uppercase px-24 md:px-[118px] lg:px-[140px] py-2 rounded-md text-white bg-black  font-medium w-full hover:opacity-90">
+            Sign Up
+          </button>
         </div>
       </div>
     </>
