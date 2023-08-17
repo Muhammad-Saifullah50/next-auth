@@ -10,7 +10,13 @@ const Navbar = () => {
           method: "POST",
         }
       );
-    } catch (error) {}
+      const apiResponseData = await apiresponse.json()
+      if (apiResponseData.status === 200){
+        return window.location.href = '/login'
+      }
+    } catch (error: any) {
+      console.error(error.message)
+    }
   };
   return (
     <div className="flex justify-center  bg-white overflow-hidden border-black border-b-2 py-3">

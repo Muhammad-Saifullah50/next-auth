@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { useState } from "react";
 
 const SignupPage = () => {
@@ -7,14 +6,15 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
-
+// setting states
   const handleSignUp = async () => {
-    if (!name || !email || !password) {
+    setError("") // clearing previous errors
+    if (!name || !email || !password) { // checking properties
       setError("Enter your name, email and password")
       return error
     }
-    const signupData = {
-      name: name,
+    const signupData = { // building the object
+      name: name, 
       email: email,
       password: password,
     };
@@ -26,10 +26,17 @@ const SignupPage = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(signupData),
+          body: JSON.stringify(signupData), // sending data in request
         }
       );
-      return window.location.href = '/dashboard'
+      const apiResponseData = await apiresponse.json(); //paersing in json
+      // console.log("API Response:", apiResponseData);
+      if (apiResponseData.status === 200) {
+        return (window.location.href = "/dashboard"); // redirecting top dashboard
+      }
+      else {
+        setError(apiResponseData.message)
+      }
 
     } catch (error) {
       console.log("signup failed")

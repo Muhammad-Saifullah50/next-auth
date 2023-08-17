@@ -12,7 +12,7 @@ export const POST = async (request: NextRequest) => {
         if (!requestbody.name || !requestbody.email || !requestbody.password) {
             // checking if any of these proprties name, email and id are not present using OR operator
             return NextResponse.json({ // returning an error response
-                message: "name, email or password not provided",
+                message: "Name, email or password not provided",
                 status: 400,
             });
         }
@@ -20,7 +20,7 @@ export const POST = async (request: NextRequest) => {
         // dchecking that user xists or not using the findExistingUser function
 
         if (!existingUser) { // throw error if user is not signed up
-            return NextResponse.json({ message: "user not signed up", status: 400 })
+            return NextResponse.json({ message: "User not signed up", status: 400 })
         }
         const storedPasswordHash = existingUser.password
         // retrieving the hash in database
@@ -28,11 +28,18 @@ export const POST = async (request: NextRequest) => {
         // console.log(storedPasswordHash)
         const passwordMatch = await bcryptjs.compare(requestbody.password, storedPasswordHash) // bcryptjs.compare will automatically convert the provided password inti hash and compare it with the hash in db
         // using await is must because it will take time to convert our password to hash
-
         // the salt is alresady included in the hash
+        const nameMatch = requestbody.name === existingUser.name
+        if (!nameMatch) {
+            return NextResponse.json({ message: "Name is incorrect", status: 400 })
+        }
 
+        const emailMatch = requestbody.email === existingUser.email
+        if (!emailMatch) {
+            return NextResponse.json({ message: "Email is incorrect", status: 400 })
+        }
         if (!passwordMatch) {
-            return NextResponse.json({ message: "password is incorrect", status: 400 })
+            return NextResponse.json({ message: "Password is incorrect", status: 400 })
         }
 
         let userid = existingUser._id // extracting userid
@@ -50,7 +57,7 @@ export const POST = async (request: NextRequest) => {
 
         // jwt.sign() is used to create a jwt token. it takes a payload and the secret key as parameters. the expidresIn is an optional param, used to specify the expiry of the token
 
-        const response = NextResponse.json({ message: "login successful", status: 200 })
+        const response = NextResponse.json({ message: "Login successful", status: 200 })
 
         response.cookies.set('token', token, { httpOnly: true })
         // setting cookies along with the response

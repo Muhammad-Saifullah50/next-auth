@@ -2,19 +2,19 @@ import { findExistingUser, writeDatabase } from "@/helpers/dbHelpers";
 import { generateUniqueId } from "@/helpers/dbHelpers";
 import { User } from "@/types";
 import { NextRequest, NextResponse } from "next/server";
-import bcryptjs, { genSalt, hashSync } from 'bcryptjs'
+import  { genSalt, hashSync } from 'bcryptjs'
 
 export const POST = async (request: NextRequest) => {
     // POST request as we will be sending data to the server
     try {
         const requestbody = await request.json()
-        console.log(requestbody, "requestbody")
+        // console.log(requestbody, "requestbody")
         // converting the incoming request into json format to deal with it and saving it in requestbody variable
 
         if (!requestbody.name || !requestbody.email || !requestbody.password) {
             // checking if any of these proprties name, email and id are not present using OR operator
             return NextResponse.json({ // returning an error response
-                message: "name, email or password not provided",
+                message: "Name, email or password not provided",
                 status: 400,
             });
         }
@@ -23,7 +23,7 @@ export const POST = async (request: NextRequest) => {
         // dchecking that user xists or not using the findExistingUser function
 
         if (userExists) {
-            return NextResponse.json({ message: "user already exists", status: 400 })
+            return NextResponse.json({ message: "User already exists", status: 400 })
         }
 
         // console.log(requestbody)
@@ -43,7 +43,7 @@ export const POST = async (request: NextRequest) => {
         };
         writeDatabase(newUser); // calling the writedatabase function and providing the newUser to it.
 
-        return NextResponse.json({ message: "signup successful", status: 200 })
+        return NextResponse.json({ message: "Signup successful", status: 200 })
         // returning successful response 
     } catch (error: any) {
         console.error(error?.nessage, "error") // error handling

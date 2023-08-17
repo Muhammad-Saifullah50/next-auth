@@ -2,7 +2,7 @@ import React from 'react'
 
 const Dashboard = () => {
     return (<>
-        <div className="heading text-5xl font-bold text-center px-20 py-5 leading-relaxed">
+        <div className="heading text-2xl sm:text-5xl font-bold text-center px-20 py-5 leading-relaxed">
             <h2> Congratulations! You have been authorized inside. </h2>
         </div>
         <div className="subheading text-3xl font-bold text-center my-5">

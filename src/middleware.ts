@@ -11,15 +11,15 @@ export const middleware = async (request: NextRequest) => {
 
     if (!publicPath && !token) { // user is requesting a private path with no token , it will be redirected to /login to get his token
         return NextResponse.redirect(new URL('/login', request.nextUrl))
-
     }
-    if (publicPath && token) {
-        return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
 
+    if (publicPath && token) { //user is requsting private path with token
+        return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
+        // redirected to dashboard page
     }
 }
 
-export const config = {
+export const config = { // these are the paths where the middlware will execute
     matcher: [
         "/login",
         '/signup',

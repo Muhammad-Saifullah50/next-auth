@@ -8,29 +8,40 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  // setting states 
+
   const handleLogin = async () => {
-    if (!name || !email || !password) {
+    setError("") // clearing previous errors 
+    if (!name || !email || !password) { // checking properties
       setError("Enter your name, email and password");
+      return error // rerturning error
     }
-    const loginData = {
+    const loginData = { // constructing the object
       name: name,
       email: email,
       password: password,
     };
     try {
-      const apiresponse = await fetch(
+      const apiresponse = await fetch( //calling the login api
         `${window.location.origin}/api/auth/login`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(loginData),
+          body: JSON.stringify(loginData), // sending data in stringified form
         }
       );
-      return (window.location.href = "/dashboard");
+      const apiResponseData = await apiresponse.json(); //parsing the data in json to access its properties 
+      // console.log("API Response:", apiResponseData);
+      if (apiResponseData.status === 200) { // if status is 200 redirect to the dashboard
+        return (window.location.href = "/dashboard");
+      }
+      else {
+        setError(apiResponseData.message) //  setting the error messsage to teh error state
+      }
     } catch (error) {
-      console.log("signup failed");
+      console.log("login failed");
     }
   };
   return (
@@ -48,7 +59,7 @@ const LoginPage = () => {
               type="text"
               placeholder="Name"
               value={name}
-              onChange={(event) => setName(event.target.value)}
+              onChange={(event) => setName(event.target.value)} //onchange event
               className=" bg-gray-100 rounded-lg px-5 py-2 focus:border border-black-600 focus:outline-black  text-black placeholder:text-gray-600 placeholder:opacity-50 font-semibold  w-full"
             />
           </div>
@@ -75,18 +86,17 @@ const LoginPage = () => {
         </div>
         <div className="text-center mt-7 flex flex-col space-y-5">
           <button
-            onClick={handleLogin}
+            onClick={handleLogin} // onclick event
             className="uppercase px-24 md:px-[118px] lg:px-[140px] py-2 rounded-md text-white bg-black  font-medium w-full hover:opacity-90"
           >
             login
           </button>
           <p className="text-center text-lg">
-            Not a user?{" "}
+            Not a user?
             <Link
               href="/signup"
               className="hover:underline hover:underline-offset-8 hover:decoration-black hover:decoration-2"
             >
-              {" "}
               Sign Up
             </Link>
           </p>
