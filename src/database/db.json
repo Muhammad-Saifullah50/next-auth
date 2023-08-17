@@ -1,10 +1,3 @@
 {
-  "users": [
-    {
-      "_id": "47d82a75-dac4-4ddc-82d9-37778596ec36",
-      "name": "saif",
-      "email": "saif",
-      "password": "$2a$10$qKKavW4mJNZGAYwzMcf2puLKCE8VXGW/AjXZhTatz0zWXd4nfRA46"
-    }
-  ]
+  "users": []
 }
