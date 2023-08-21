@@ -2,7 +2,9 @@ import { findExistingUser, writeDatabase } from "@/helpers/dbHelpers";
 import { generateUniqueId } from "@/helpers/dbHelpers";
 import { User } from "@/types";
 import { NextRequest, NextResponse } from "next/server";
-import  { genSalt, hashSync } from 'bcryptjs'
+import { genSalt, hashSync } from 'bcryptjs'
+import { SignUpSchema } from "@/validations/signUpSchema/signUpSchema";
+import { ZodError } from "zod";
 
 export const POST = async (request: NextRequest) => {
     // POST request as we will be sending data to the server
@@ -10,6 +12,19 @@ export const POST = async (request: NextRequest) => {
         const requestbody = await request.json()
         // console.log(requestbody, "requestbody")
         // converting the incoming request into json format to deal with it and saving it in requestbody variable
+        try {
+            const validate = SignUpSchema.parse(requestbody) // validating the request according to our schema
+
+
+        } catch (error) {
+            if (error instanceof ZodError) {
+                const errmsg = error.flatten().fieldErrors
+                // console.log(errmsg)
+                return NextResponse.json({ message: errmsg, status: 400 })
+            }
+        }
+
+
 
         if (!requestbody.name || !requestbody.email || !requestbody.password) {
             // checking if any of these proprties name, email and id are not present using OR operator
