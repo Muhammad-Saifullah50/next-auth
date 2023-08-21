@@ -5,18 +5,20 @@ const SignupPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cnfpwd, setcnfpwd] = useState('')
   const [error, setError] = useState("")
 // setting states
   const handleSignUp = async () => {
     setError("") // clearing previous errors
-    if (!name || !email || !password) { // checking properties
-      setError("Enter your name, email and password")
+    if (!name || !email || !password || !cnfpwd) { // checking properties
+      setError("Enter your name, email, password and confirmation")
       return error
     }
     const signupData = { // building the object
       name: name, 
       email: email,
       password: password,
+      confirmPassword: cnfpwd
     };
     try {
       const apiresponse = await fetch(
@@ -76,6 +78,17 @@ const SignupPage = () => {
               value={password}
               onChange={(event) => {
                 setPassword(event.target.value);
+              }}
+              className=" bg-gray-100 rounded-lg px-5 py-2 focus:border border-black-600 focus:outline-black  text-black placeholder:text-gray-600 placeholder:opacity-50 font-semibold  w-full"
+            />
+          </div>
+          <div className="w-full">
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={cnfpwd}
+              onChange={(event) => {
+                setcnfpwd(event.target.value);
               }}
               className=" bg-gray-100 rounded-lg px-5 py-2 focus:border border-black-600 focus:outline-black  text-black placeholder:text-gray-600 placeholder:opacity-50 font-semibold  w-full"
             />

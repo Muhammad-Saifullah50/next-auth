@@ -1,5 +1,16 @@
 {
   "users": [
-  
+    {
+      "_id": "b894a7dc-ef0d-469a-8b25-2c1f6dab1678",
+      "name": "ssa",
+      "email": "saif@hotmail.com",
+      "password": "$2a$10$5F7ii0fs6MI4qWWJgFokMOYbl9zhnV4e5FQ6iIwFpqDcs6e2ERVK2"
+    },
+    {
+      "_id": "717effca-a214-4941-826c-0e20476a649a",
+      "name": "saif",
+      "email": "saif@gmail.com",
+      "password": "$2a$10$n5t4aqijxeqDl25tJPR8.essVWZGOSo5ENI1zdHNGEe0mccdZVsfi"
+    }
   ]
 }
